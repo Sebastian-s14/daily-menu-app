@@ -1,0 +1,1 @@
+export { getSaludo } from './getSaludo'

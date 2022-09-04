@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pruebas en Demo Debe de retornar un elemento 1`] = `
+<div>
+  <div>
+    Demo Component
+  </div>
+</div>
+`;

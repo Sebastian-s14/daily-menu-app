@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pruebas en App Debe de retornar un elemento 1`] = `
+<div>
+  <div
+    class="text-center"
+  >
+    <header
+      class="flex flex-col gap-6 justify-center items-center h-screen text-xl text-white bg-[#282c34]"
+    >
+      <p>
+        Hello Vite + React!
+      </p>
+      <p>
+        <button
+          aria-label="Incrementar"
+          class="py-2 px-4 text-black bg-white"
+          type="button"
+        >
+          count is: 
+          0
+        </button>
+      </p>
+      <p>
+        Edit 
+        <code>
+          App.tsx
+        </code>
+         and save to test HMR updates.
+      </p>
+      <p>
+        <a
+          class="text-[#61dafb]"
+          href="https://reactjs.org"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Learn React
+        </a>
+         | 
+        <a
+          class="text-[#61dafb]"
+          href="https://vitejs.dev/guide/features.html"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Vite Docs
+        </a>
+      </p>
+    </header>
+  </div>
+</div>
+`;
