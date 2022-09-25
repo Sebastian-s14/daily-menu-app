@@ -6,11 +6,13 @@ import { IUser } from '../../shared/interfaces'
 
 export interface UserState {
   userModal: boolean
+  userAlertDialog: boolean
   activeUser?: IUser
 }
 
 const USER_INITIAL_STATE: UserState = {
   userModal: false,
+  userAlertDialog: false,
   activeUser: undefined,
 }
 
@@ -29,7 +31,11 @@ React.PropsWithChildren<{}>) => {
     dispatch({ type: 'SET USER MODAL', payload: value })
   }, [])
 
-  const setActiveUser = useCallback((user: IUser) => {
+  const setUserAlertDialog = useCallback((value: boolean) => {
+    dispatch({ type: 'SET USER ALERT DIALOG', payload: value })
+  }, [])
+
+  const setActiveUser = useCallback((user?: IUser) => {
     dispatch({ type: 'SET ACTIVE USER', payload: user })
   }, [])
 
@@ -38,6 +44,7 @@ React.PropsWithChildren<{}>) => {
       value={{
         ...state,
         setUserModal,
+        setUserAlertDialog,
         setActiveUser,
         // addNewEntry,
         // updateEntry,

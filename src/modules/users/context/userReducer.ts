@@ -5,7 +5,11 @@ type UserActionType =
   | { type: 'SET USER MODAL'; payload: boolean }
   | {
       type: 'SET ACTIVE USER'
-      payload: IUser
+      payload: IUser | undefined
+    }
+  | {
+      type: 'SET USER ALERT DIALOG'
+      payload: boolean
     }
 
 export const userReducer = (
@@ -22,6 +26,11 @@ export const userReducer = (
       return {
         ...state,
         activeUser: action.payload,
+      }
+    case 'SET USER ALERT DIALOG':
+      return {
+        ...state,
+        userAlertDialog: action.payload,
       }
 
     default:

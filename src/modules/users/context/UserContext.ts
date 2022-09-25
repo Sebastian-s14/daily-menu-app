@@ -3,8 +3,10 @@ import { IUser } from '../../shared/interfaces'
 
 interface UserContextProps {
   userModal: boolean
+  userAlertDialog: boolean
   activeUser?: IUser
   setUserModal: (value: boolean) => void
+  setUserAlertDialog: (value: boolean) => void
   setActiveUser: (user?: IUser) => void
   // setUserUser: (user: IUserUser) => void
   // addNewEntry: (description: string) => void

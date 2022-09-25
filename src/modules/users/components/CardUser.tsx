@@ -14,17 +14,22 @@ import { useContext } from 'react'
 
 import { IUser } from '../../shared/interfaces'
 import { UserContext } from '../context'
-import { useUsers } from '../hooks'
+// import { useUsers } from '../hooks'
 
 interface CardUserProps {
   user: IUser
 }
 export const CardUser = ({ user }: CardUserProps) => {
-  const { setUserModal, setActiveUser } = useContext(UserContext)
+  const { setUserModal, setActiveUser, setUserAlertDialog } =
+    useContext(UserContext)
 
-  const { deleteUser } = useUsers()
+  // const { deleteUser } = useUsers()
 
-  const handleDelete = () => deleteUser(user.id)
+  const handleDelete = () => {
+    // deleteUser(user.id)
+    setActiveUser(user)
+    setUserAlertDialog(true)
+  }
 
   const handleSelect = () => {
     setActiveUser(user)

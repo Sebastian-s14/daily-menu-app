@@ -6,20 +6,36 @@ import { collection, onSnapshot, query } from 'firebase/firestore'
 import { useContext, useEffect, useState } from 'react'
 
 import { db } from '../../firebase'
+import { AlertDialog } from '../../shared/components'
 import { IUser } from '../../shared/interfaces'
-
 import { CardUser, CreateEditUserDialog } from '../components'
 import { UserContext } from '../context'
-// import { useUsers } from '../hooks'
+import { useUsers } from '../hooks'
 
 export const UsersPage = () => {
   const [users, setUsers] = useState<IUser[]>()
-  const { userModal, setUserModal, setActiveUser, activeUser } =
-    useContext(UserContext)
+  const {
+    activeUser,
+    userModal,
+    userAlertDialog,
+    setUserModal,
+    setActiveUser,
+    setUserAlertDialog,
+  } = useContext(UserContext)
+
+  const { deleteUser } = useUsers()
 
   const handleAdduser = () => {
     setUserModal(true)
     setActiveUser(undefined)
+  }
+
+  const handleDeleteUser = async () => {
+    // console.log({ activeUser })
+    if (activeUser?.id) {
+      await deleteUser(activeUser.id)
+      setUserAlertDialog(false)
+    }
   }
 
   // if (users.length > 0)
@@ -86,6 +102,11 @@ export const UsersPage = () => {
         key={activeUser?.id}
         isOpen={userModal}
         handleClose={() => setUserModal(false)}
+      />
+      <AlertDialog
+        isOpen={userAlertDialog}
+        handleClose={() => setUserAlertDialog(false)}
+        handleAccept={handleDeleteUser}
       />
     </>
   )
