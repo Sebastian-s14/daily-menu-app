@@ -17,7 +17,7 @@
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
-    "plugin:tailwindcss/recommended",
+    // "plugin:tailwindcss/recommended",
     "plugin:jest/recommended",
     "plugin:jest/style"
   ],
@@ -33,7 +33,7 @@
     "react",
     "@typescript-eslint",
     "react-hooks",
-    "tailwindcss",
+    // "tailwindcss",
     "jest"
     // "prettier"
   ],
@@ -42,9 +42,9 @@
     "react/react-in-jsx-scope": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "@typescript-eslint/no-non-null-assertion": "off",
-    "tailwindcss/classnames-order": "warn",
-    "tailwindcss/no-custom-classname": "warn",
-    "tailwindcss/no-contradicting-classname": "error"
+    "@typescript-eslint/no-non-null-assertion": "off"
+    // "tailwindcss/classnames-order": "warn",
+    // "tailwindcss/no-custom-classname": "warn",
+    // "tailwindcss/no-contradicting-classname": "error"
   }
 }

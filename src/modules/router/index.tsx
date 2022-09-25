@@ -7,7 +7,7 @@ import './../firebase'
 import { LoginPage } from '../auth'
 import { UsersPage } from '../users'
 // import { Dashboard } from '../dashboard'
-import { MainLayout } from '../shared/layouts'
+import { MainLayoutMaterial } from '../shared/layouts'
 import { ProtectedRoute, PublicRoute } from './components'
 import { AuthContext } from '../auth/context'
 
@@ -34,6 +34,7 @@ export const AppRouter = () => {
           id: user.uid,
           name: user.displayName || 'no-name',
           email: user.email || 'email',
+          photo: user.photoURL || '',
         })
       } else {
         // User is signed out
@@ -66,7 +67,7 @@ export const AppRouter = () => {
           path="/"
           element={
             <ProtectedRoute isAuthenticated={isAuthenticated}>
-              <MainLayout />
+              <MainLayoutMaterial />
             </ProtectedRoute>
           }
         >
