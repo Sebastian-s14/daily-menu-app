@@ -1,35 +1,57 @@
-import { PencilIcon, TrashIcon } from '@heroicons/react/24/solid'
-import { deleteDoc, doc } from 'firebase/firestore'
-import toast from 'react-hot-toast'
-import { db } from '../../firebase'
+import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/Edit'
+import EngineeringIcon from '@mui/icons-material/Engineering'
+import PersonIcon from '@mui/icons-material/Person'
+import Avatar from '@mui/material/Avatar'
+import Box from '@mui/material/Box'
+import { red, yellow } from '@mui/material/colors'
+import IconButton from '@mui/material/IconButton'
+import ListItem from '@mui/material/ListItem'
+import ListItemAvatar from '@mui/material/ListItemAvatar'
+import ListItemButton from '@mui/material/ListItemButton'
+import ListItemText from '@mui/material/ListItemText'
+import { useContext } from 'react'
 
 import { IUser } from '../../shared/interfaces'
+import { UserContext } from '../context'
+import { useUsers } from '../hooks'
 
 interface CardUserProps {
   user: IUser
 }
 export const CardUser = ({ user }: CardUserProps) => {
-  const handleDelete = async () => {
-    // console.log('handle delete', user.id)
-    const userDocRef = doc(db, 'users', user.id)
-    await toast.promise(deleteDoc(userDocRef), {
-      loading: 'Eliminando...',
-      success: <b>Usuario eliminado!</b>,
-      error: <b>No se pudo eliminar.</b>,
-    })
+  const { setUserModal, setActiveUser } = useContext(UserContext)
+
+  const { deleteUser } = useUsers()
+
+  const handleDelete = () => deleteUser(user.id)
+
+  const handleSelect = () => {
+    setActiveUser(user)
+    setUserModal(true)
   }
 
   return (
-    <div className="flex justify-between rounded-xl bg-blue-500 p-4 text-2xl text-white">
-      {user.name}
-      <div className="flex gap-4">
-        <button className="flex items-center">
-          <PencilIcon className="h-6 w-6 text-yellow-500" />
-        </button>
-        <button className="flex items-center" onClick={handleDelete}>
-          <TrashIcon className="h-6 w-6 text-red-500" />
-        </button>
-      </div>
-    </div>
+    <ListItem
+      secondaryAction={
+        <Box>
+          <IconButton aria-label="edit" onClick={handleSelect}>
+            <EditIcon sx={{ color: yellow[600] }} />
+          </IconButton>
+          <IconButton aria-label="delete" onClick={handleDelete}>
+            <DeleteIcon color="error" />
+          </IconButton>
+        </Box>
+      }
+    >
+      <ListItemButton onClick={handleSelect}>
+        <ListItemAvatar>
+          <Avatar sx={{ bgcolor: user.type === '2' ? red[500] : '' }}>
+            {user.type === '2' ? <EngineeringIcon /> : <PersonIcon />}
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary={user.name} />
+      </ListItemButton>
+    </ListItem>
   )
 }
