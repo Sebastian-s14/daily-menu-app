@@ -1,5 +1,6 @@
 {
-  "name": "vite-react-ts-template",
+  "name": "daily-menu-app",
+  "homepage": ".",
   "private": true,
   "version": "0.0.0",
   "scripts": {
