@@ -67,3 +67,5 @@ export const UserDetail = () => {
     </Box>
   )
 }
+
+export default UserDetail

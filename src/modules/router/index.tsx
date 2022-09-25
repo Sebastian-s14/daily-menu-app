@@ -1,15 +1,17 @@
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
-import { useContext, useEffect, useState } from 'react'
+import { lazy, Suspense, useContext, useEffect, useState } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
 import './../firebase'
-// import { App } from '../app'
-import { LoginPage } from '../auth'
-// import { Dashboard } from '../dashboard'
-import { MainLayoutMaterial } from '../shared/layouts'
 import { ProtectedRoute, PublicRoute } from './components'
 import { AuthContext } from '../auth/context'
-import { UserDetail, UsersPage } from '../users/pages'
+
+const MainLayoutMaterial = lazy(
+  () => import('../shared/layouts/MainLayoutMaterial'),
+)
+const LoginPage = lazy(() => import('../auth/pages/LoginPage'))
+const UsersPage = lazy(() => import('../users/pages/UsersPage'))
+const UserDetail = lazy(() => import('../users/pages/UserDetail'))
 
 export const AppRouter = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -46,45 +48,37 @@ export const AppRouter = () => {
     })
   }, [setAuthUser])
 
-  // useEffect(() => {
-  //   if (user) {
-  //     // setAuthUser({
-  //     //   id: user?.uid,
-  //     //   email: user?.email || '',
-  //     //   name: user?.displayName || '',
-  //     // })
-  //     console.log('i have user')
-  //   }
-  // }, [user, setAuthUser])
   console.log({ isAuthenticated })
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return <div>Loading validation...</div>
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute isAuthenticated={isAuthenticated}>
-              <MainLayoutMaterial />
-            </ProtectedRoute>
-          }
-        >
-          <Route index element={<UsersPage />} />
-          <Route path="user/:userId" element={<UserDetail />} />
-          {/* <Route path="dashboard" element={<UsersPage />} /> */}
-        </Route>
-        <Route
-          path="login"
-          element={
-            <PublicRoute isAuthenticated={isAuthenticated}>
-              <LoginPage />
-            </PublicRoute>
-          }
-        />
-        <Route path="*" element={<Navigate to="/login" />} />
-      </Routes>
-    </BrowserRouter>
+    <Suspense fallback={<div>Loading...</div>}>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute isAuthenticated={isAuthenticated}>
+                <MainLayoutMaterial />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<UsersPage />} />
+            <Route path="user/:userId" element={<UserDetail />} />
+            {/* <Route path="dashboard" element={<UsersPage />} /> */}
+          </Route>
+          <Route
+            path="login"
+            element={
+              <PublicRoute isAuthenticated={isAuthenticated}>
+                <LoginPage />
+              </PublicRoute>
+            }
+          />
+          <Route path="*" element={<Navigate to="/login" />} />
+        </Routes>
+      </BrowserRouter>
+    </Suspense>
   )
 }

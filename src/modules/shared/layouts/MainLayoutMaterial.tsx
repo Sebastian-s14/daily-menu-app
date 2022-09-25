@@ -215,3 +215,5 @@ export const MainLayoutMaterial = () => {
     </>
   )
 }
+
+export default MainLayoutMaterial
