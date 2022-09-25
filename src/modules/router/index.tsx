@@ -5,11 +5,11 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import './../firebase'
 // import { App } from '../app'
 import { LoginPage } from '../auth'
-import { UsersPage } from '../users'
 // import { Dashboard } from '../dashboard'
 import { MainLayoutMaterial } from '../shared/layouts'
 import { ProtectedRoute, PublicRoute } from './components'
 import { AuthContext } from '../auth/context'
+import { UserDetail, UsersPage } from '../users/pages'
 
 export const AppRouter = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -72,6 +72,7 @@ export const AppRouter = () => {
           }
         >
           <Route index element={<UsersPage />} />
+          <Route path="user/:userId" element={<UserDetail />} />
           {/* <Route path="dashboard" element={<UsersPage />} /> */}
         </Route>
         <Route

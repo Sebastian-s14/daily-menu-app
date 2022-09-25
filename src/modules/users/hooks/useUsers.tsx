@@ -3,6 +3,7 @@ import {
   collection,
   deleteDoc,
   doc,
+  getDoc,
   // onSnapshot,
   // query,
   updateDoc,
@@ -17,6 +18,22 @@ export const useUsers = () => {
   // const [users, setUsers] = useState<IUser[]>()
 
   // const q = useMemo(() => query(collection(db, 'users')), [])
+
+  const getUser = useCallback(async (userId: string) => {
+    const docRef = doc(db, 'users', userId)
+    const docSnap = await getDoc(docRef)
+    if (docSnap.exists()) {
+      const data = docSnap.data()
+      console.log('Document data:', docSnap.data())
+      return {
+        id: userId,
+        ...data,
+      } as IUser
+    } else {
+      toast.error('Este usuario no existe')
+      return undefined
+    }
+  }, [])
 
   const addUser = useCallback(async (formData: Omit<IUser, 'id'>) => {
     toast.promise(
@@ -88,6 +105,7 @@ export const useUsers = () => {
 
   return {
     // users,
+    getUser,
     addUser,
     updateUser,
     deleteUser,

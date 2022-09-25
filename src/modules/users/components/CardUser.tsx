@@ -11,27 +11,28 @@ import ListItemAvatar from '@mui/material/ListItemAvatar'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
 import { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { IUser } from '../../shared/interfaces'
 import { UserContext } from '../context'
-// import { useUsers } from '../hooks'
 
 interface CardUserProps {
   user: IUser
 }
 export const CardUser = ({ user }: CardUserProps) => {
-  const { setUserModal, setActiveUser, setUserAlertDialog } =
+  const { setActiveUser, setUserAlertDialog, setUserModal } =
     useContext(UserContext)
 
-  // const { deleteUser } = useUsers()
+  const navigate = useNavigate()
 
   const handleDelete = () => {
-    // deleteUser(user.id)
     setActiveUser(user)
     setUserAlertDialog(true)
   }
 
-  const handleSelect = () => {
+  const handleSelect = () => navigate(`user/${user.id}`)
+
+  const handleEdit = () => {
     setActiveUser(user)
     setUserModal(true)
   }
@@ -40,7 +41,7 @@ export const CardUser = ({ user }: CardUserProps) => {
     <ListItem
       secondaryAction={
         <Box>
-          <IconButton aria-label="edit" onClick={handleSelect}>
+          <IconButton aria-label="edit" onClick={handleEdit}>
             <EditIcon sx={{ color: yellow[600] }} />
           </IconButton>
           <IconButton aria-label="delete" onClick={handleDelete}>

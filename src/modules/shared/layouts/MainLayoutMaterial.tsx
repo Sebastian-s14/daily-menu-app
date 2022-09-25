@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 
 // import AdbIcon from '@mui/icons-material/Adb'
 import MenuIcon from '@mui/icons-material/Menu'
@@ -18,7 +18,7 @@ import { getAuth, signOut } from 'firebase/auth'
 
 import { AuthContext } from '../../auth/context'
 
-const pages = ['Products']
+const pages = ['users']
 const settings = ['Profile', 'Dashboard']
 
 export const MainLayoutMaterial = () => {
@@ -26,6 +26,8 @@ export const MainLayoutMaterial = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
 
   const { user } = useContext(AuthContext)
+
+  const navigate = useNavigate()
 
   const auth = getAuth()
 
@@ -139,7 +141,7 @@ export const MainLayoutMaterial = () => {
               {pages.map((page) => (
                 <Button
                   key={page}
-                  onClick={handleCloseNavMenu}
+                  onClick={() => navigate(`${page}`)}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
                   {page}
@@ -196,6 +198,7 @@ export const MainLayoutMaterial = () => {
       <Container
         sx={{
           overflowY: 'auto',
+          height: '100%',
           maxHeight: {
             xs: '85vh',
             md: '85vh',
