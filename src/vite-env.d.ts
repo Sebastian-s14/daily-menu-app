@@ -1,5 +1,4 @@
 /// <reference types="vite/client" />
-declare module '@heroicons/*'
 
 interface ImportMetaEnv {
   readonly VITE_APIKEY: string
