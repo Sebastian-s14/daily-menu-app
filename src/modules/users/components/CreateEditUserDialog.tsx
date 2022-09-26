@@ -113,18 +113,18 @@ export const CreateEditUserDialog = ({
                     value="1"
                     control={<Radio />}
                     label={
-                      <>
+                      <div style={{ display: 'flex', gap: '.5rem' }}>
                         <PersonIcon /> Obrero
-                      </>
+                      </div>
                     }
                   />
                   <FormControlLabel
                     value="2"
                     control={<Radio />}
                     label={
-                      <>
+                      <div style={{ display: 'flex', gap: '.5rem' }}>
                         <EngineeringIcon /> Ingeniero
-                      </>
+                      </div>
                     }
                   />
                 </RadioGroup>
