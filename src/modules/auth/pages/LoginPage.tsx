@@ -1,5 +1,9 @@
+import GoogleIcon from '@mui/icons-material/Google'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import MenuBookIcon from '@mui/icons-material/MenuBook'
+import { deepOrange, grey } from '@mui/material/colors'
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
-import { Button } from '../../shared/components'
 
 export const LoginPage = () => {
   const signInWithGoogle = () => {
@@ -33,13 +37,33 @@ export const LoginPage = () => {
       })
   }
   return (
-    <div className="h-screen w-full bg-gray-400 text-3xl text-white">
-      {/* <div>This is my LoginPage</div> */}
-      <div>
-        {/* <button>Login with Google</button> */}
-        <Button text="Login" onClick={signInWithGoogle} />
-      </div>
-    </div>
+    <Box
+      sx={{
+        display: 'flex',
+        height: '100%',
+        backgroundColor: grey[300],
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <Box
+        style={{
+          display: 'flex',
+          gap: '1rem',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <MenuBookIcon sx={{ fontSize: 100, color: deepOrange[500] }} />
+        <Button
+          variant="contained"
+          endIcon={<GoogleIcon />}
+          onClick={signInWithGoogle}
+        >
+          Iniciar sesión con google
+        </Button>
+      </Box>
+    </Box>
   )
 }
 
