@@ -55,9 +55,15 @@ export const UserDetail = () => {
       <Box>items</Box>
       <Box
         sx={{
-          position: 'absolute',
-          bottom: '1rem',
-          right: '1rem',
+          position: 'fixed',
+          bottom: {
+            xs: '.5rem',
+            md: '1rem',
+          },
+          right: {
+            xs: '.5rem',
+            md: '1rem',
+          },
         }}
       >
         <Fab color="primary" aria-label="add" onClick={handleAddItem}>

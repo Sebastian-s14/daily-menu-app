@@ -2,7 +2,7 @@ import AddIcon from '@mui/icons-material/Add'
 import Box from '@mui/material/Box'
 import Fab from '@mui/material/Fab'
 import List from '@mui/material/List'
-import { collection, onSnapshot, query } from 'firebase/firestore'
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { useContext, useEffect, useState } from 'react'
 
 import { db } from '../../firebase'
@@ -53,7 +53,7 @@ export const UsersPage = () => {
   //   )
 
   useEffect(() => {
-    const q = query(collection(db, 'users'))
+    const q = query(collection(db, 'users'), orderBy('uppercaseName'))
     const unsuscribe = onSnapshot(q, (querySnapshot) => {
       const data = querySnapshot.docs.map((doc) => ({
         id: doc.id,
@@ -68,16 +68,10 @@ export const UsersPage = () => {
 
   return (
     <>
-      {/* All users */}
-      {/* Bienvenid@, {user?.name}
-      <br />
-      {user?.email}
-      <br /> */}
-      {/* <pre>{JSON.stringify(users, null, 2)}</pre> */}
       <Box
         sx={{
           overflowY: 'auto',
-          padding: '1rem',
+          paddingBottom: '.8rem',
         }}
       >
         <List>
@@ -88,16 +82,21 @@ export const UsersPage = () => {
       </Box>
       <Box
         sx={{
-          position: 'absolute',
-          bottom: '1rem',
-          right: '1rem',
+          position: 'fixed',
+          bottom: {
+            xs: '.5rem',
+            md: '1rem',
+          },
+          right: {
+            xs: '.5rem',
+            md: '1rem',
+          },
         }}
       >
         <Fab color="primary" aria-label="add" onClick={handleAdduser}>
           <AddIcon />
         </Fab>
       </Box>
-
       <CreateEditUserDialog
         key={activeUser?.id}
         isOpen={userModal}

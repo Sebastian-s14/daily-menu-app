@@ -54,9 +54,13 @@ export const CreateEditUserDialog = ({
       return toast.error('Complete el nombre')
 
     if (edit) {
-      activeUser?.id && updateUser(activeUser?.id, formData)
+      activeUser?.id &&
+        updateUser(activeUser?.id, {
+          ...formData,
+          uppercaseName: formData.name.toUpperCase(),
+        })
     } else {
-      await addUser(formData)
+      await addUser({ ...formData, uppercaseName: formData.name.toUpperCase() })
       reset()
     }
 

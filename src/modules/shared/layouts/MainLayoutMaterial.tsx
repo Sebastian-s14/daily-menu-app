@@ -200,14 +200,13 @@ export const MainLayoutMaterial = () => {
           overflowY: 'auto',
           height: '100%',
           maxHeight: {
-            xs: '85vh',
+            xs: '90vh',
             md: '85vh',
           },
           marginTop: {
             xs: '.5rem',
             md: '1rem',
           },
-          // padding: '1rem',
         }}
       >
         <Outlet />
