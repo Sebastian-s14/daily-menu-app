@@ -32,7 +32,6 @@ export const userReducer = (
         ...state,
         userAlertDialog: action.payload,
       }
-
     default:
       return state
   }

@@ -2,18 +2,20 @@ import { useCallback, useReducer } from 'react'
 // import { useSnackbar } from 'notistack'
 
 import { userReducer, UserContext } from '.'
-import { IUser } from '../../shared/interfaces'
+import { IUser, IUserRecord } from '../../shared/interfaces'
 
 export interface UserState {
   userModal: boolean
   userAlertDialog: boolean
   activeUser?: IUser
+  activeUserHistory?: IUserRecord
 }
 
 const USER_INITIAL_STATE: UserState = {
   userModal: false,
   userAlertDialog: false,
   activeUser: undefined,
+  activeUserHistory: undefined,
 }
 
 export const UserProvider = ({
@@ -39,6 +41,9 @@ React.PropsWithChildren<{}>) => {
     dispatch({ type: 'SET ACTIVE USER', payload: user })
   }, [])
 
+  const setActiveUserHistory = useCallback((userHistory?: IUserRecord) => {
+    dispatch({ type: 'SET ACTIVE USER HISTORY', payload: userHistory })
+  }, [])
   return (
     <UserContext.Provider
       value={{
@@ -46,6 +51,7 @@ React.PropsWithChildren<{}>) => {
         setUserModal,
         setUserAlertDialog,
         setActiveUser,
+        setActiveUserHistory,
         // addNewEntry,
         // updateEntry,
       }}
