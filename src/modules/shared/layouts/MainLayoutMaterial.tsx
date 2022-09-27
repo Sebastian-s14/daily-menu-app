@@ -17,6 +17,7 @@ import Typography from '@mui/material/Typography'
 import { getAuth, signOut } from 'firebase/auth'
 
 import { AuthContext } from '../../auth/context'
+import { UserContext } from '../../users/context'
 
 const pages = ['users']
 const settings = ['Profile', 'Dashboard']
@@ -26,6 +27,8 @@ export const MainLayoutMaterial = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
 
   const { user } = useContext(AuthContext)
+
+  const { activeUser } = useContext(UserContext)
 
   const navigate = useNavigate()
 
@@ -148,6 +151,9 @@ export const MainLayoutMaterial = () => {
                 </Button>
               ))}
             </Box>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              {activeUser?.name}
+            </Typography>
 
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
