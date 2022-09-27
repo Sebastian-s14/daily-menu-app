@@ -52,7 +52,7 @@ export const CardUser = ({ user }: CardUserProps) => {
     >
       <ListItemButton onClick={handleSelect}>
         <ListItemAvatar>
-          <Avatar sx={{ bgcolor: user.type === '2' ? red[500] : '' }}>
+          <Avatar sx={{ bgcolor: user.type === '2' ? red[500] : yellow[600] }}>
             {user.type === '2' ? <EngineeringIcon /> : <PersonIcon />}
           </Avatar>
         </ListItemAvatar>
