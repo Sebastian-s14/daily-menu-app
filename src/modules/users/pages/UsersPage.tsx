@@ -103,6 +103,7 @@ export const UsersPage = () => {
         handleClose={() => setUserModal(false)}
       />
       <AlertDialog
+        title="¿Está seguro de eliminar el usuario?"
         isOpen={userAlertDialog}
         handleClose={() => setUserAlertDialog(false)}
         handleAccept={handleDeleteUser}

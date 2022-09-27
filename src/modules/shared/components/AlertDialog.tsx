@@ -4,12 +4,14 @@ import DialogActions from '@mui/material/DialogActions'
 import DialogTitle from '@mui/material/DialogTitle'
 
 interface AlertDialogProps {
+  title: string
   isOpen: boolean
   handleClose: () => void
   handleAccept: () => void
 }
 
 export const AlertDialog = ({
+  title,
   isOpen,
   handleClose,
   handleAccept,
@@ -21,9 +23,7 @@ export const AlertDialog = ({
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <DialogTitle id="alert-dialog-title">
-        {'¿Está seguro de eliminar el usuario?'}
-      </DialogTitle>
+      <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
       <DialogActions>
         <Button color="error" onClick={handleClose}>
           Cancelar
